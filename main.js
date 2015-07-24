@@ -1,23 +1,25 @@
-// var studentArray = createStudent(prompt('How many students?'));
-
-// var mentorArray = createMentor(prompt('How many mentors?'));
-
 var formInfo = document.getElementsByTagName('form')[0];
 
 var button = document.getElementById('input');
 
-var student = document.getElementsByClassName('students')[0];
+var students = document.getElementsByClassName('students')[0];
 
 var mentors = document.getElementsByClassName('mentors')[0];
 
+var studentArray = [];
 
+var mentorArray = [];
 
-// formInfo.children[0].value;
-// formInfo.children[1].value;
-// formInfo.children[2].value;
+function appendChild(parent, text){
+  var p = document.createElement('p');
+  p.innerHTML = text;
+  parent.appendChild(p);
+}
 
-function appendChild(parent){
-
+function textOutput(array){
+  return ('Name: ' + array[0].name + '\n' +
+          'Number: ' + array[0].number + '\n' +
+          'City: ' +array[0].city);
 }
 
 function student(name, number, city){
@@ -27,7 +29,6 @@ function student(name, number, city){
 }
 
   function createStudent(numOfStudents){
-    var studentArray = [];
     for (var i = 0; i < numOfStudents; i++) {
     var studentDetails = new student;
       studentArray.push(studentDetails);
@@ -38,11 +39,13 @@ function student(name, number, city){
 button.onclick = function(){
   if (formInfo[3].checked === true){
     createStudent(1);
+    appendChild(students, textOutput(studentArray));
     for (var i = 0; i < 3; i++) {
     formInfo.children[i].value = null;
     }
   } else if (formInfo[4].checked === true){
       createMentor(1);
+      appendChild(mentors, textOutput(mentorArray));
     for (var i = 0; i < 3; i++) {
     formInfo.children[i].value = null;
     }
@@ -50,13 +53,12 @@ button.onclick = function(){
 };
 
 function mentor(name, number, city){
-  this.name = prompt('Mentor Name:');
-  this.number = prompt('Mentor Number:');
-  this.city = prompt('Mentor city');
+  this.name = formInfo.children[0].value;
+  this.number = formInfo.children[1].value;
+  this.city = formInfo.children[2].value;
 }
 
 function createMentor(numOfMentors){
-  var mentorArray = [];
   for (var i = 0; i < numOfMentors; i++) {
   var mentorDetails = new mentor;
     mentorArray.push(mentorDetails);
