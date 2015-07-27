@@ -16,10 +16,10 @@ function appendChild(parent, text){
   parent.appendChild(p);
 }
 
-function textOutput(array){
-  return ('Name: ' + array[0].name + '\n' +
-          'Number: ' + array[0].number + '\n' +
-          'City: ' +array[0].city);
+function textOutput(array, i){
+  return ('Name: ' + array[i].name + '\n' +
+          'Number: ' + array[i].number + '\n' +
+          'City: ' + array[i].city);
 }
 
 function student(name, number, city){
@@ -28,24 +28,30 @@ function student(name, number, city){
   this.city = formInfo.children[2].value;
 }
 
-  function createStudent(numOfStudents){
-    for (var i = 0; i < numOfStudents; i++) {
-    var studentDetails = new student;
-      studentArray.push(studentDetails);
-    } return studentArray;
-  }
+function createStudent(numOfStudents){
+  for (var i = 0; i < numOfStudents; i++) {
+  var studentDetails = new student;
+    studentArray.push(studentDetails);
+  } return studentArray;
+}
 
+show.onclick = function(){
+  students.innerHTML = null;
+  mentors.innerHTML = null;
+  for (var j = 0; j < 100; j++) {
+  appendChild(students, textOutput(studentArray, j));
+  appendChild(mentors, textOutput(mentorArray, j));
+}
+};
 
 button.onclick = function(){
   if (formInfo[3].checked === true){
     createStudent(1);
-    appendChild(students, textOutput(studentArray));
     for (var i = 0; i < 3; i++) {
     formInfo.children[i].value = null;
     }
   } else if (formInfo[4].checked === true){
       createMentor(1);
-      appendChild(mentors, textOutput(mentorArray));
     for (var i = 0; i < 3; i++) {
     formInfo.children[i].value = null;
     }
@@ -84,7 +90,7 @@ function printMentors(array){
 
 function numOfStudents(){
   var num = studentArray.length;
-  alert('There are '+ num + ' students')
+  alert('There are '+ num + ' students');
 }
 
 function numOfMentors(){
